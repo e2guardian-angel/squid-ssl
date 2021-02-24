@@ -5,7 +5,7 @@ ENV SQUID_USER=proxy
 ARG BUILD_DATE
 ENV OS debian
 
-RUN apt update && apt install -y wget gnupg gnupg2 gnupg1 iptables
+RUN apt update && apt install -y wget gnupg gnupg2 gnupg1 iptables socat
 
 # add diladele apt key
 RUN wget -qO - http://packages.diladele.com/diladele_pub.asc | apt-key add -
