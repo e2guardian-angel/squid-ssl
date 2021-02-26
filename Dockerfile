@@ -5,7 +5,7 @@ ENV SQUID_USER=proxy
 ARG BUILD_DATE
 ENV OS debian
 
-RUN apt update && apt install -y wget gnupg gnupg2 gnupg1 iptables socat
+RUN apt update && apt install -y wget gnupg gnupg2 gnupg1 socat
 
 # add diladele apt key
 RUN wget -qO - http://packages.diladele.com/diladele_pub.asc | apt-key add -
@@ -25,8 +25,6 @@ RUN /usr/lib/squid/security_file_certgen -c -s /var/lib/squid/ssl_db -M 4MB
 RUN chown -R $SQUID_USER:$SQUID_USER /var/lib/squid
 
 EXPOSE 3128
-EXPOSE 3129
-EXPOSE 3130
 
 ADD ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
