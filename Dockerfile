@@ -1,9 +1,9 @@
-FROM alpine:latest
+FROM alpine:3.12.1
 MAINTAINER Justin Schwartzbeck <justinmschw@gmail.com>
 
 ENV SQUID_USER=squid
 
-RUN apk update && apk add socat iptables squid
+RUN apk update && apk add socat squid
 
 # Initialize SSL db
 RUN mkdir -p /var/lib/squid
