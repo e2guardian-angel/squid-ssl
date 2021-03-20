@@ -1,7 +1,7 @@
 #!/bin/bash
 # encoding: utf-8
 
-SQUID_USER=proxy
+SQUID_USER=squid
 SQUID_DIR=/etc/squid
 
 # If certificates/config were not provided, create them here.
@@ -19,15 +19,6 @@ if [ $ICAP ]; then
     until ping -c1 ${ICAP} >/dev/null 2>&1; do :; done
     socat TCP4-LISTEN:1344,fork TCP4:${ICAP}:1344 &
 fi
-
-cleanup() {
-    iptables -t nat -D OUTPUT -m owner --uid-owner proxy -j ACCEPT
-}
-trap cleanup INT TERM
-
-cleanup
-
-iptables -t nat -A OUTPUT -m owner --uid-owner proxy -j ACCEPT
 
 SQUID_EXEC=$(which squid)
 exec $SQUID_EXEC -f $SQUID_DIR/squid.conf -NYCd 10

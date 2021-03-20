@@ -1,23 +1,9 @@
-FROM debian:buster
+FROM alpine:3.12.1
 MAINTAINER Justin Schwartzbeck <justinmschw@gmail.com>
 
-ENV SQUID_USER=proxy
-ARG BUILD_DATE
-ENV OS debian
+ENV SQUID_USER=squid
 
-RUN apt update && apt install -y wget gnupg gnupg2 gnupg1 socat iptables
-
-# add diladele apt key
-RUN wget -qO - http://packages.diladele.com/diladele_pub.asc | apt-key add -
-
-# add repository to the sources list
-RUN echo "deb http://squid411.diladele.com/ubuntu/ bionic main" > /etc/apt/sources.list.d/squid411.diladele.com.list
-
-RUN apt-get update
-
-RUN apt-get install -y squid-common
-RUN apt-get install -y squid 
-RUN apt-get install -y squidclient
+RUN apk update && apk add socat squid
 
 # Initialize SSL db
 RUN mkdir -p /var/lib/squid
@@ -28,4 +14,4 @@ EXPOSE 3128
 
 ADD ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]
