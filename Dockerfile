@@ -12,11 +12,8 @@ RUN apk update \
   && cd .. \
   && git clone https://github.com/e2guardian-angel/squid-acl-category-helper.git \
   && cd squid-acl-category-helper \
-  && make ip_category_helper \
-  && make host_category_helper \
-  && mkdir -p /usr/local/bin/squidhelpers \
-  && cp ip_category_helper /usr/local/bin/squidhelpers \
-  && cp host_category_helper /usr/local/bin/squidhelpers
+  && make \
+  && make install
 
 FROM alpine:3.12.1
 MAINTAINER Justin Schwartzbeck <justinmschw@gmail.com>
