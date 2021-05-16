@@ -32,7 +32,7 @@ if [ -f "${GUARDIAN_CONF}" ]; then
 	    CATEGORY=$(extract_value "$row" category)
 	    DECRYPT=$(extract_value "$row" decrypt)
 	    # Define ACL
-	    if [ "${CATEGORY}" != "all" ]; then
+	    if [ "${CATEGORY}" != "all" ] && [ ! "$(echo ${ACLS} | grep ${CATEGORY} )" ]; then
 		ACLS="${ACLS}\nacl ${CATEGORY} external category_helper"
 	    fi
 	    # Add rule
@@ -67,7 +67,7 @@ if [ -f "${GUARDIAN_CONF}" ]; then
 	CATEGORY=$(extract_value "$row" category)
 	ALLOW=$(extract_value "$row" allow)
 	# Define ACL
-	if [ "${CATEGORY}" != "all" ]; then
+	if [ "${CATEGORY}" != "all" ] && [ ! "$(echo ${ACLS} | grep ${CATEGORY} )" ]; then
 	    ACLS="${ACLS}\nacl ${CATEGORY} external category_helper"
 	fi
 	# Add rule
