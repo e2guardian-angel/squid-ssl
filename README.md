@@ -12,7 +12,9 @@ Baseimage
 ======================
 alpine:3.12.1
 
-### Quickstart 
+### Quickstart
+**Note:** For raspberry pi, replace the 'x86' in the image name with 'pi'
+
 ```bash
 docker run --name squid -d \
   --publish 3128:3128 \
