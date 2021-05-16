@@ -1,12 +1,16 @@
 #squid-ssl-x86
 ======================
-This is a docker container made for x86 that contains a squid proxy with SSL bump and ICAP capabilities.
+This is a docker container that contains a squid proxy with SSL bump and ICAP capabilities.
 It is based on syakesaba/docker-sslbump-proxy.
 I am creating this docker image as part of a content filtering solution with squid and e2guardian as an ICAP service.
 
+Images:
+jusschwa/squid-ssl-x86
+jusschwa/squid-ssl-pi
+
 Baseimage
 ======================
-debian:stretch
+alpine:3.12.1
 
 ### Quickstart 
 ```bash
