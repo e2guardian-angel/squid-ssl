@@ -12,5 +12,8 @@ if [ $ICAP ]; then
     socat TCP4-LISTEN:1344,fork TCP4:${ICAP}:1344 &
 fi
 
+# Autoconfigure
+sh configsquid.sh
+
 SQUID_EXEC=$(which squid)
 exec $SQUID_EXEC -f $SQUID_DIR/squid.conf -NYCd 10
