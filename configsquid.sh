@@ -1,8 +1,8 @@
 #!/bin/sh
 GUARDIAN_CONF=/opt/guardian/guardian.json
 CONFIG="$(cat $GUARDIAN_CONF)"
-OUTPUT_CERT_PATH=/etc/squid/ssl/bluestar.crt
-OUTPUT_KEY_PATH=/etc/squid/ssl/bluestar.pem
+OUTPUT_CERT_PATH=/etc/squid/ssl/public.crt
+OUTPUT_KEY_PATH=/etc/squid/ssl/private.pem
 
 extract_value () {
     echo "${1}" | jq -r .${2}
