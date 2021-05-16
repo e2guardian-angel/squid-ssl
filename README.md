@@ -1,4 +1,4 @@
-#squid-ssl-x86
+#squid-ssl
 ======================
 This is a docker container that contains a squid proxy with SSL bump and ICAP capabilities.
 It is based on syakesaba/docker-sslbump-proxy.
