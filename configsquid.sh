@@ -1,6 +1,6 @@
 #!/bin/sh
 GUARDIAN_CONF=/opt/guardian/guardian.json
-CONFIG="$(cat $GUARDIAN_CONF)"
+SQUID_CONF_DIR=${SQUID_DIR}
 OUTPUT_CERT_PATH=/etc/squid/ssl/public.crt
 OUTPUT_KEY_PATH=/etc/squid/ssl/private.pem
 
@@ -13,6 +13,7 @@ extract_value_compact () {
 }
 
 if [ -f "${GUARDIAN_CONF}" ]; then
+    CONFIG="$(cat $GUARDIAN_CONF)"
     LOCALNET=$(extract_value "${CONFIG}" localNetwork)
     SQUID_CONF_DIR=$(extract_value "${CONFIG}" squidConfigDir)
     SQUID_PORT=$(extract_value "${CONFIG}" proxyPort)
@@ -89,6 +90,4 @@ if [ -f "${GUARDIAN_CONF}" ]; then
 
     # Replace squid.conf
     mv ${SQUID_CONF_DIR}/squid.conf.gen ${SQUID_CONF_DIR}/squid.conf
-else
-    cp ${SQUID_CONF_DIR}/squid.conf.default ${SQUID_CONF_DIR}/squid.conf
 fi

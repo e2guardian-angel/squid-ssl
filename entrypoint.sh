@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 SQUID_USER=squid
-SQUID_DIR=/etc/squid
+export SQUID_DIR=/etc/squid
 
 # For some reason, squid doesn't do DNS resolution for ICAP, etc.
 # So we have to use socat to forward these to the correct containers.
