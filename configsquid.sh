@@ -1,8 +1,8 @@
 #!/bin/sh
 GUARDIAN_CONF=/opt/guardian/guardian.json
 SQUID_CONF_DIR=${SQUID_DIR}
-OUTPUT_CERT_PATH=/etc/squid/ssl/public.crt
-OUTPUT_KEY_PATH=/etc/squid/ssl/private.pem
+OUTPUT_CERT_PATH=/etc/squid/ssl/tls.crt
+OUTPUT_KEY_PATH=/etc/squid/ssl/tls.key
 
 extract_value () {
     echo "${1}" | jq -r .${2}
