@@ -3,6 +3,8 @@ FROM alpine:3.12.1 as builder
 WORKDIR /tmp
 ENV SQUID_CONF_DIR=/etc/squid
 
+COPY ./buildhelper /tmp/buildhelper
+
 RUN apk update \
   && apk add git build-base automake autoconf libtool curl-dev jsoncpp-dev jsoncpp-static \
   && git clone https://github.com/mrtazz/restclient-cpp.git \
@@ -10,9 +12,7 @@ RUN apk update \
   && sh autogen.sh \
   && make \
   && make install \
-  && cd .. \
-  && git clone https://github.com/e2guardian-angel/squid-acl-category-helper.git \
-  && cd squid-acl-category-helper \
+  && cd /tmp/buildhelper \
   && make \
   && make install
 
