@@ -18,7 +18,6 @@ if [ -f "${GUARDIAN_CONF}" ]; then
     SQUID_CONF_DIR=$(extract_value "${CONFIG}" squidConfigDir)
     SQUID_PORT=$(extract_value "${CONFIG}" proxyPort)
     SSL_BUMP_ENABLED=$(extract_value "${CONFIG}" sslBumpEnabled)
-    DNS_IP=$(extract_value "${CONFIG}" dnsIP)
 
     cp ${SQUID_CONF_DIR}/squid.conf.tmpl ${SQUID_CONF_DIR}/squid.conf.gen
 
@@ -88,7 +87,7 @@ if [ -f "${GUARDIAN_CONF}" ]; then
     sed -i "s~SQUIDCONF_SSL_CONFIG~$SSL_CONFIG~g" ${SQUID_CONF_DIR}/squid.conf.gen
     sed -i "s~SQUIDCONF_HTTP_PORT_DEFINITION~$HTTP_PORT_LINE~g" ${SQUID_CONF_DIR}/squid.conf.gen
     sed -i "s~SQUIDCONF_ICAP_CONFIG~$ICAP_CONFIG~g" ${SQUID_CONF_DIR}/squid.conf.gen
-    sed -i "s~DNS_IP~$DNS_IP~g" ${SQUID_CONF_DIR}/squid.conf.gen
+    sed -i "s~DNS_IP~$DNS_REVERSE_SERVICE_HOST~g" ${SQUID_CONF_DIR}/squid.conf.gen
 
     # Replace squid.conf
     mv ${SQUID_CONF_DIR}/squid.conf.gen ${SQUID_CONF_DIR}/squid.conf
