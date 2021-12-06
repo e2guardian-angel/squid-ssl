@@ -21,7 +21,7 @@ acl Safe_ports port 591		# filemaker
 acl Safe_ports port 777		# multiling http
 acl CONNECT method CONNECT
 
-external_acl_type category_helper %ACL %DST /usr/local/bin/squidhelpers/category_helper
+external_acl_type category_helper children-max=20 %ACL %DST /usr/local/bin/squidhelpers/category_helper
 SQUIDCONF_ACL_DEFINITIONS
 
 #
