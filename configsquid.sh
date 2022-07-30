@@ -1,5 +1,6 @@
 #!/bin/sh
 GUARDIAN_CONF=/opt/guardian/guardian.json
+TMPL_DIR=/tmpl
 SQUID_CONF_DIR=${SQUID_DIR}
 OUTPUT_CERT_PATH=/etc/squid/ssl/tls.crt
 OUTPUT_KEY_PATH=/etc/squid/ssl/tls.key
@@ -19,7 +20,7 @@ if [ -f "${GUARDIAN_CONF}" ]; then
     SQUID_PORT=$(extract_value "${CONFIG}" proxyPort)
     SSL_BUMP_ENABLED=$(extract_value "${CONFIG}" sslBumpEnabled)
 
-    cp ${SQUID_CONF_DIR}/squid.conf.tmpl ${SQUID_CONF_DIR}/squid.conf.gen
+    cp ${TMPL_DIR}/squid.conf.tmpl ${SQUID_CONF_DIR}/squid.conf.gen
 
     ACLS=""
     DECRYPT_RULES=""

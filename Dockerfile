@@ -32,8 +32,9 @@ RUN mkdir -p /var/lib/squid \
   && chown -R $SQUID_USER:$SQUID_USER /var/lib/squid \
   && rm -rf /var/cache/apk/*
 
-WORKDIR /etc/squid
+WORKDIR /tmpl
 COPY squid.conf.tmpl .
+WORKDIR /etc/squid
 COPY configsquid.sh .
 RUN chmod +x configsquid.sh
 
