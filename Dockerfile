@@ -24,7 +24,7 @@ ENV SQUID_USER=squid
 COPY --from=builder /usr/local/bin/squidhelpers /usr/local/bin/squidhelpers
 
 RUN apk update \
-  && apk add openssl socat squid libcurl jq
+  && apk add openssl socat squid libcurl
 
 # Initialize SSL db
 RUN mkdir -p /var/lib/squid \
@@ -33,7 +33,6 @@ RUN mkdir -p /var/lib/squid \
   && rm -rf /var/cache/apk/*
 
 WORKDIR /tmpl
-COPY squid.conf.tmpl .
 WORKDIR /etc/squid
 COPY configsquid.sh .
 RUN chmod +x configsquid.sh

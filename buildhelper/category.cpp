@@ -12,27 +12,13 @@
 #include <csignal>
 #include "restclient-cpp/restclient.h"
 #include "json/json.h"
+#include <cstdlib>
 
 using namespace std;
-const string CONFIG_PATH = "/opt/guardian/guardian.json";
 const int READ_BUFFER_SIZE = 1024;
 
 void signalHandler( int signum ) {
   exit(signum);
-}
-
-std::string readAllText(const std::string& path) {
-  std::ifstream infile;
-  infile.open(path);
-  if (infile.fail()) {
-    return "";
-  }
-  infile.seekg(0, std::ios::end);
-  auto size = infile.tellg();
-  std::string contents((std::size_t)size, ' ');
-  infile.seekg(0);
-  infile.read(&contents[0], size);
-  return contents;
 }
 
 Json::Value stringToJson(std::string arg) {
@@ -52,18 +38,10 @@ int main(int argc, char **argv) {
   /*
    * Get guardian-angel host and port from environment variables
    */
-  string configStr = readAllText(CONFIG_PATH);
-  if (configStr == "") {
-    cerr << "Must provide a valid config file in " + CONFIG_PATH << endl;
-    return -1;
-  }
-
   string host, port;
   try {
-    Json::Value config = stringToJson(configStr);
-    Json::Value helperConfig = config["helper"];
-    host = helperConfig["host"].asString();
-    port = helperConfig["port"].asString();
+    host = std::getenv("LOOKUP_HOST");
+    port = std::getenv("LOOKUP_PORT");
     stoi(port.c_str());
   } catch (std::exception e) {
     cerr << "ERROR: helper section, host and/or port are missing or invalid" << endl;
