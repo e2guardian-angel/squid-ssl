@@ -1,4 +1,4 @@
-FROM alpine:3.12.1 as builder
+FROM alpine:latest as builder
 
 WORKDIR /tmp
 ENV SQUID_CONF_DIR=/etc/squid
@@ -16,7 +16,7 @@ RUN apk update \
   && make \
   && make install
 
-FROM alpine:3.12.1
+FROM alpine:latest
 MAINTAINER Justin Schwartzbeck <justinmschw@gmail.com>
 
 ENV SQUID_USER=squid
@@ -36,6 +36,9 @@ WORKDIR /tmpl
 WORKDIR /etc/squid
 COPY configsquid.sh .
 RUN chmod +x configsquid.sh
+
+ARG VERSION
+ENV SQUIDVER=$VERSION
 
 EXPOSE 3128
 
